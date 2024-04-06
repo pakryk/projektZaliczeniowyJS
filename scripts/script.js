@@ -9,11 +9,11 @@ const bikeData = [
     power: 117,
     milleage: 2200,
     price: 52000,
-    accesories:{
-        sportPack:7500,
-        streetPack:5000,
-        weekendPack:6000
-    }
+    accesories: {
+      sportPack: 7500,
+      streetPack: 5000,
+      weekendPack: 6000,
+    },
   },
   {
     brand: 'Triumph',
@@ -22,11 +22,11 @@ const bikeData = [
     power: 90,
     milleage: 2200,
     price: 65000,
-    accesories:{
-        sportPack:7500,
-        streetPack:5000,
-        weekendPack:6000
-    }
+    accesories: {
+      sportPack: 7500,
+      streetPack: 5000,
+      weekendPack: 6000,
+    },
   },
   {
     brand: 'Kawasaki',
@@ -35,11 +35,11 @@ const bikeData = [
     power: 111,
     milleage: 2200,
     price: 62500,
-    accesories:{
-        sportPack:7500,
-        streetPack:5000,
-        weekendPack:6000
-    }
+    accesories: {
+      sportPack: 7500,
+      streetPack: 5000,
+      weekendPack: 6000,
+    },
   },
   {
     brand: 'Ducati',
@@ -48,11 +48,11 @@ const bikeData = [
     power: 208,
     milleage: 2200,
     price: 100000,
-    accesories:{
-        sportPack:7500,
-        streetPack:5000,
-        weekendPack:6000
-    }
+    accesories: {
+      sportPack: 7500,
+      streetPack: 5000,
+      weekendPack: 6000,
+    },
   },
 ];
 
@@ -78,7 +78,7 @@ displayBikes = function displayBikes(bikesData) {
 };
 displayBikes(bikeData);
 
-//click bike
+//listener on bike
 const bikes = document.querySelectorAll('.bike');
 bikes.forEach(function (bike) {
   bike.addEventListener('click', function () {
