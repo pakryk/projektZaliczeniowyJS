@@ -1,4 +1,12 @@
+// ------VARIABLES
+//--main-section-variables
+const mainSection = document.querySelector('.main');
 const bikesContainer = document.querySelector('.bikes__container');
+
+//--pricing-section-variables
+const sportPackPrice = document.querySelector('.sport-pack__price');
+const streetPackPrice = document.querySelector('.street-pack__price');
+const weekendPackPrice = document.querySelector('.weekend-pack__price');
 
 // bikes list
 const bikeData = [
@@ -64,12 +72,12 @@ displayBikes = function displayBikes(bikesData) {
     const html = `
       <div class="bike">
         <img class="bike__img" src="assets/bike-${i}.jpg" alt="" />
-        <p class="bike__description bike__description--price">${bike.price}</p>
+        <p class="bike__description bike__description--price">${bike.price} PLN</p>
         <p class="bike__description bike__description--title">${bike.brand} ${bike.model}</p>
         <div class="bike__spec">
           <p class="bike__description bike__description--year">${bike.year}</p>
-          <p class="bike__description bike__description--power">${bike.power}</p>
-          <p class="bike__description bike__description--mileage">${bike.milleage}</p>
+          <p class="bike__description bike__description--power">${bike.power} KM</p>
+          <p class="bike__description bike__description--mileage">${bike.milleage} km</p>
         </div>
       </div>`;
 
@@ -82,6 +90,8 @@ displayBikes(bikeData);
 const bikes = document.querySelectorAll('.bike');
 bikes.forEach(function (bike) {
   bike.addEventListener('click', function () {
+    mainSection.classList.add('hidden');
+
     bike.style.backgroundColor = 'red';
     console.log('click');
   });

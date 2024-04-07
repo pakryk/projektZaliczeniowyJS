@@ -8,37 +8,91 @@
     <script defer src="scripts/script.js"></script>
   </head>
   <body>
-    <header>
-      <h1 class="heading-primary">Motorshop</h1>
-      <h2 class="heading-secondary">motocykle w najlepszych cenach</h2>
-      <div>
-        <input type="text" placeholder="marka" />
-      </div>
-    </header>
-    <main>
-      <section class="bikes__container">
+<!-- main page -->
+<div class="container">
+    <main class="main">
+        <header class="header">
+            <h1 class="heading-primary">Motorshop</h1>
+            <h2 class="heading-secondary">motocykle w najlepszych cenach</h2>
+           
+            <input class="searchbar" type="search" placeholder="marka" />
+            
+        </header>
+        <div class="bikes__container">
         <div class="bike">
           <img class="bike__img" src="assets/bike-2.jpg" alt="" />
-          <p class="bike__description bike__description--price">43000</p>
-          <p class="bike__description bike__description--title">Yamaha XSR 900</p>
-            <p class="bike__description bike__description--year">2022</p>
-          <p class="bike__description bike__description--power">117</p>
-          <p class="bike__description bike__description--mileage">2200</p>
+          <div class="bike__description">
+          <p class="bike__description--price">43000</p>
+          <p class="bike__description--title">Yamaha XSR 900</p>
+            <p class="bike__description--year">2022</p>
+          <p class="bike__description--power">117</p>
+          <p class="bike__description--mileage">2200</p>
+        </div>
           </div>
           
         </div>
       </section>
     </main>
 
-    <section class="pricing">
-<p>SEKCJA ZAMAWIANIA</p>
-<form action="">
-    <p>Wybierz metodę płatności</p>
-  <input type="radio" id="leasing" name="buying-method" value="LEASING">
-  <label for="leasing">Leasing</label><br>
-  <input type="radio" id="cash" name="buying-method" value="CASH">
-  <label for="leasing">Gotówka</label><br>
-  </form>
+    <!-- pricing section -->
+    <section class="section-pricing">         
+      
+    <div class="selected-bike">
+      <p class="selected-bike__txt">Wybrany motocykl: <span class="selected-bike__span">Yamaha XSR 900</span></p>
+
+      <p class="price__txt">Cena całkowita: <span class="price__total">52000</span></p>
+    </div>
+    <div class="accessories">
+      <div class="pack">
+        <p class="pack__name sport-pack">Sport pack</p>
+        <p class="pack__price">6500</p>
+      </div>
+      <div class="pack">
+        <p class="pack__name street-pack">Street pack</p>
+        <p class="pack__price">6500</p>
+      </div>
+      <div class="pack">
+        <p class="pack__name weekend-pack">Weekend pack</p>
+        <p class="pack__price">6500</p>
+      </div>
+    </div>
+    <div class="pricing-data">
+      <form action="" class="data">
+        <div>
+          <label for="full-name__input" class="full-name">Imię i nazwisko</label>
+          <input id="full-name__input" type="text">
+        </div>
+        <div>
+          <label for="place__input" class="full-name">Miejsce odbioru</label>
+          <input id="place__input" type="text">
+        </div>
+        <div>
+          <label for="date__input" class="full-name">Data odbioru</label>
+          <input id="full-name__input" type="date">
+        </div>
+        
+      </form>
+    </div>
+    <div>
+      <p class="paying-method">Metoda płatności</p>
+      <form action="">
+        <input id="cash" type="radio">
+        <label for="cash">Gotówka</label>
+        <input id="leasing" type="radio">
+        <label for="cash">Leasing</label>
+      </form>
+    </div>
+
+      
     </section>
+    <section class="section-final">
+
+      <p>OSTATNIA SEKCJA</p>
+      <p class="thanks-txt"><span class="client-name">Patryk</span>, dziękujemy za zakup <span class="bike-name">Yamaha XSR 900</span></p>
+      <p class="delivery-txt">Motocykl zostanie doręczony <span class="delivery-date">08/02/2021</span></p>
+    </section>
+  </div>
   </body>
 </html>
+
+
