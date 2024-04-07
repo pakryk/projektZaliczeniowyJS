@@ -70,8 +70,7 @@ html {
   font-family: sans-serif;
 }
 
-.hidden {
-}
+
 
 /* main styles */
 .header {
@@ -153,7 +152,7 @@ html {
   display: flex;
   flex-direction: column;
 
-  height: 100vh;
+  
   background-color: rgb(181, 255, 255);
 }
 
@@ -248,4 +247,10 @@ html {
 
 .delivery-date {
   color: red;
+}
+
+/* HIDDEN CLASS */
+
+.hidden {
+  display: none;
 }
