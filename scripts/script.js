@@ -1,7 +1,7 @@
 // ------VARIABLES
 //--main-section-variables
 const mainSection = document.querySelector('.main');
-const bikesContainer = document.querySelector('.bikes__container');
+const bikesList = document.querySelector('.bikes__list');
 const searchbar = document.querySelector('.searchbar');
 
 //--pricing-section-variables
@@ -73,12 +73,12 @@ const bikeData = [
 ];
 
 // display list of bikes function
-displayBikes = function displayBikes(bikesData) {
-  bikesContainer.innerHTML = '';
+const displayBikes = function (bikesData) {
+  bikesList.innerHTML = '';
 
-  bikesData.forEach(function (bike, i) {
+  bikesData.forEach(function (bike) {
     const html = `
-      <div class="bike">
+      <li class="bike">
         <img class="bike__img" src="assets/bike-${bike.imgIndex}.jpg" alt="" />
         <p class="bike__description bike__description--price">${bike.price} PLN</p>
         <p class="bike__description bike__description--title">${bike.brand} ${bike.model}</p>
@@ -87,8 +87,8 @@ displayBikes = function displayBikes(bikesData) {
           <p class="bike__description bike__description--power">${bike.power} KM</p>
           <p class="bike__description bike__description--mileage">${bike.milleage} km</p>
         </div>
-      </div>`;
-    bikesContainer.insertAdjacentHTML('beforeend', html);
+      </li>`;
+    bikesList.insertAdjacentHTML('beforeend', html);
   });
 };
 displayBikes(bikeData);
@@ -125,7 +125,7 @@ function searchBikes(searchText) {
   // filter method on bikeData arr
   const filteredBikes = bikeData.filter(bike => {
     const brand = bike.brand.toLowerCase();
-    return brand.includes(query)
+    return brand.includes(query);
   });
 
   // Display only filtered bikes
@@ -133,7 +133,7 @@ function searchBikes(searchText) {
 }
 
 // Listener on searchbar
-searchbar.addEventListener('input', function(event) {
+searchbar.addEventListener('input', function (event) {
   const searchText = event.target.value;
   searchBikes(searchText);
 });

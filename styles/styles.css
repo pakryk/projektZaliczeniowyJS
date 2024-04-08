@@ -103,8 +103,9 @@ html {
 .main {
   height: 100vh;
   background-color: rgb(255, 174, 174);
+  overflow: scroll;
 }
-.bikes__container {
+.bikes__list {
   display: flex;
   justify-content: space-around;
   align-items: center;
