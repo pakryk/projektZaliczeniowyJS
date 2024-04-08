@@ -2,12 +2,12 @@
 //--main-section-variables
 const mainSection = document.querySelector('.main');
 const bikesContainer = document.querySelector('.bikes__container');
+const searchbar = document.querySelector('.searchbar');
 
 //--pricing-section-variables
 const sectionPricing = document.querySelector('.section-pricing');
 const selectedBike = document.querySelector('.selected-bike__span');
 const totalPrice = document.querySelector('.total-price');
-
 const sportPackPrice = document.querySelector('.sport-pack__price');
 const streetPackPrice = document.querySelector('.street-pack__price');
 const weekendPackPrice = document.querySelector('.weekend-pack__price');
@@ -21,6 +21,7 @@ const bikeData = [
     power: 117,
     milleage: 2200,
     price: 52000,
+    imgIndex: 0,
     accesories: {
       sportPack: 7500,
       streetPack: 5000,
@@ -34,6 +35,7 @@ const bikeData = [
     power: 90,
     milleage: 2200,
     price: 65000,
+    imgIndex: 1,
     accesories: {
       sportPack: 7500,
       streetPack: 5000,
@@ -47,6 +49,7 @@ const bikeData = [
     power: 111,
     milleage: 2200,
     price: 62500,
+    imgIndex: 2,
     accesories: {
       sportPack: 7500,
       streetPack: 5000,
@@ -60,6 +63,7 @@ const bikeData = [
     power: 208,
     milleage: 2200,
     price: 100000,
+    imgIndex: 3,
     accesories: {
       sportPack: 7500,
       streetPack: 5000,
@@ -68,14 +72,14 @@ const bikeData = [
   },
 ];
 
-// display list of bikes
+// display list of bikes function
 displayBikes = function displayBikes(bikesData) {
   bikesContainer.innerHTML = '';
 
   bikesData.forEach(function (bike, i) {
     const html = `
       <div class="bike">
-        <img class="bike__img" src="assets/bike-${i}.jpg" alt="" />
+        <img class="bike__img" src="assets/bike-${bike.imgIndex}.jpg" alt="" />
         <p class="bike__description bike__description--price">${bike.price} PLN</p>
         <p class="bike__description bike__description--title">${bike.brand} ${bike.model}</p>
         <div class="bike__spec">
@@ -89,8 +93,7 @@ displayBikes = function displayBikes(bikesData) {
 };
 displayBikes(bikeData);
 
-//listener on bike
-//listener on bike
+// updating pricing section depends on which bike was selected
 const bikes = document.querySelectorAll('.bike');
 bikes.forEach(function (bike, index) {
   bike.addEventListener('click', function () {
@@ -107,15 +110,30 @@ bikes.forEach(function (bike, index) {
       sectionPricing.classList.remove('hidden');
       selectedBike.textContent = `${selectedBikeData.brand} ${selectedBikeData.model}`;
       totalPrice.textContent = `${totalPriceValue} PLN`;
-      sportPackPrice.textContent = `${selectedBikeData.accesories.sportPack} PLN`
-      streetPackPrice.textContent = `${selectedBikeData.accesories.streetPack} PLN`
-      weekendPackPrice.textContent = `${selectedBikeData.accesories.weekendPack} PLN`
-    } else {
-      console.error('Nie znaleziono danych dla wybranego roweru.');
+      sportPackPrice.textContent = `${selectedBikeData.accesories.sportPack} PLN`;
+      streetPackPrice.textContent = `${selectedBikeData.accesories.streetPack} PLN`;
+      weekendPackPrice.textContent = `${selectedBikeData.accesories.weekendPack} PLN`;
     }
   });
 });
 
+// searchbar filter function
+function searchBikes(searchText) {
+  // converting text to lowercase
+  const query = searchText.toLowerCase();
 
+  // filter method on bikeData arr
+  const filteredBikes = bikeData.filter(bike => {
+    const brand = bike.brand.toLowerCase();
+    return brand.includes(query)
+  });
 
+  // Display only filtered bikes
+  displayBikes(filteredBikes);
+}
 
+// Listener on searchbar
+searchbar.addEventListener('input', function(event) {
+  const searchText = event.target.value;
+  searchBikes(searchText);
+});
