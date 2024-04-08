@@ -4,6 +4,10 @@ const mainSection = document.querySelector('.main');
 const bikesContainer = document.querySelector('.bikes__container');
 
 //--pricing-section-variables
+const sectionPricing = document.querySelector('.section-pricing');
+const selectedBike = document.querySelector('.selected-bike__span');
+const totalPrice = document.querySelector('.total-price');
+
 const sportPackPrice = document.querySelector('.sport-pack__price');
 const streetPackPrice = document.querySelector('.street-pack__price');
 const weekendPackPrice = document.querySelector('.weekend-pack__price');
@@ -80,19 +84,38 @@ displayBikes = function displayBikes(bikesData) {
           <p class="bike__description bike__description--mileage">${bike.milleage} km</p>
         </div>
       </div>`;
-
     bikesContainer.insertAdjacentHTML('beforeend', html);
   });
 };
 displayBikes(bikeData);
 
 //listener on bike
+//listener on bike
 const bikes = document.querySelectorAll('.bike');
-bikes.forEach(function (bike) {
+bikes.forEach(function (bike, index) {
   bike.addEventListener('click', function () {
-    mainSection.classList.add('hidden');
+    // selected bike data based on its index
+    const selectedBikeData = bikeData[index];
+    console.log(selectedBikeData);
 
-    bike.style.backgroundColor = 'red';
-    console.log('click');
+    // Checking if bike data was found
+    if (selectedBikeData) {
+      const totalPriceValue = selectedBikeData.price;
+
+      // update pricing section with selectedBikeData
+      mainSection.classList.add('hidden');
+      sectionPricing.classList.remove('hidden');
+      selectedBike.textContent = `${selectedBikeData.brand} ${selectedBikeData.model}`;
+      totalPrice.textContent = `${totalPriceValue} PLN`;
+      sportPackPrice.textContent = `${selectedBikeData.accesories.sportPack} PLN`
+      streetPackPrice.textContent = `${selectedBikeData.accesories.streetPack} PLN`
+      weekendPackPrice.textContent = `${selectedBikeData.accesories.weekendPack} PLN`
+    } else {
+      console.error('Nie znaleziono danych dla wybranego roweru.');
+    }
   });
 });
+
+
+
+
