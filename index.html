@@ -8,6 +8,97 @@
     <script defer src="scripts/script.js"></script>
   </head>
   <body>
-    
+    <!-- MAIN SECTION -->
+    <section class="section-main">
+      <header class="header">
+        <h1 class="header__title">MotoShop</h1>
+        <input class="input header__input" type="text" placeholder="szukaj" />
+      </header>
+      <main class="main">
+        <ul class="list__bike">
+          <li class="bike">
+            <img
+              class="bike__img"
+              src="assets/bike-0.jpg"
+              alt="Yamaha XSR 900"
+            />
+            <div class="bike__description">
+              <p class="bike__description--name">Yamaha XSR 900</p>
+              <div class="bike__description--stats">
+                <p class="bike__description--year">2022</p>
+                <p class="bike__description--mileage">5000 km</p>
+                <p class="bike__description--power">117 KM</p>
+              </div>
+              <p class="bike__description--price">52000 PLN</p>
+            </div>
+          </li>
+        </ul>
+      </main>
+    </section>
+
+    <!-- BUYING SECTION -->
+    <section class="section-buying">
+      <!-- selected bike -->
+      <div class="selected-bike__container">
+        <p class="selected-bike__name">Wybrany motocykl: Yamaha XSR 900</p>
+        <p class="selected-bike__price">10000 PLN</p>
+      </div>
+      <!-- accessories -->
+      <p class="accessories__title">Pakiety dodatkowe:</p>
+      <div class="accessories-container">
+        <figure class="accessories accessories__sport">
+          <p class="accessories__name">SPORT PACK</p>
+          <ul class="accessories__list">
+            <li class="accessories__item">wydech</li>
+            <li class="accessories__item">wydech</li>
+            <li class="accessories__item">wydech</li>
+            <li class="accessories__item">wydech</li>
+          </ul>
+          <p class="accessories__price">7500 PLN</p>
+        </figure>
+
+        <figure class="accessories accessories__street">
+          <p class="accessories__name">STREET PACK</p>
+          <ul class="accessories__list">
+            <li class="accessories__item">wydech</li>
+            <li class="accessories__item">wydech</li>
+            <li class="accessories__item">wydech</li>
+            <li class="accessories__item">wydech</li>
+          </ul>
+          <p class="accessories__price">7500 PLN</p>
+        </figure>
+
+        <figure class="accessories accessories__travel">
+          <p class="accessories__name">TRAVEL PACK</p>
+          <ul class="accessories__list">
+            <li class="accessories__item">wydech</li>
+            <li class="accessories__item">wydech</li>
+            <li class="accessories__item">wydech</li>
+            <li class="accessories__item">wydech</li>
+          </ul>
+          <p class="accessories__price">7500 PLN</p>
+        </figure>
+      </div>
+      <!-- buyer data -->
+      <p class="buyer-title">TWOJE DANE</p>
+
+      <form action="" class="form">
+        <label for="name">Imię i nazwisko</label>
+        <input id="name" type="text" />
+        <label for="destination">Miejsce odbioru</label>
+        <input id="destination" type="text" />
+        <label for="date">Data odbioru</label>
+        <input type="date" id="date" />
+        <div class="pricing">
+          <p class="pricing__title">metoda płatności</p>
+          <label for="leasing">Leasing</label>
+          <input id="leasing" type="radio" name="payment-method" />
+          <label for="cash">Gotówka</label>
+          <input id="cash" type="radio" name="payment-method" />
+        </div>
+      </form>
+      <button class="btn btn__back">powrót</button>
+      <button type="submit" class="btn btn__buy">ZAKUP</button>
+    </section>
   </body>
 </html>
