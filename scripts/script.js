@@ -1,5 +1,4 @@
 // Selecting DOM elements
-// Zmienne dla klas HTML
 const header = document.querySelector('.header');
 const headerTitle = document.querySelector('.header__title');
 const headerInput = document.querySelector('.header__input');
