@@ -82,6 +82,14 @@ body {
   overflow-x: hidden;
 }
 
+.container {
+  padding: 2.5rem;
+}
+
+.hidden {
+  display: none !important;
+}
+
 /* Main section */
 .section-main {
   text-align: center;
@@ -89,7 +97,12 @@ body {
 }
 
 .header {
-  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 4.8rem;
+  background-color: #fdf2e9;
 }
 
 .header-title {
@@ -102,7 +115,7 @@ body {
 .header-input {
   width: rem;
   border: none;
-  background-color: #fdf2e9;
+  background-color: eb984e;
   padding: 2rem;
   border-radius: 0.5rem;
 
@@ -111,104 +124,155 @@ body {
   }
 }
 
+/* Section main */
+
+.list-bike {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  flex-wrap: wrap;
+  margin-top: 3.2rem;
+}
+
+.bike {
+  display: flex;
+  flex-direction: column;
+  width: 40rem;
+
+  overflow: hidden;
+
+  box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.075);
+  border-radius: 0.5rem;
+}
+
+.bike-img {
+  width: 40rem;
+  height: auto;
+}
+
+.bike-description {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 3.2rem;
+}
+
+.bike-description--name {
+  font-size: 2rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 0.05rem;
+  margin-bottom: 0.8rem;
+}
+.bike-description--stats {
+  display: flex;
+  gap: 2rem;
+
+  font-size: 1.8rem;
+  margin-bottom: 1.8rem;
+}
+.bike-description--price {
+  font-size: 3.2rem;
+}
+
 /* Form section */
 .section-form {
-  text-align: center;
-  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.selected-bike--container {
+  margin-top: 4.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2.4rem;
 }
 
 .selected-bike--txt {
+  font-size: 2.4rem;
+  text-transform: uppercase;
   font-weight: bold;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2.4rem;
+  border: none;
+  border-radius: 0.5rem;
+  box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.075);
 }
 
 .form-title {
-  font-size: 1.5rem;
-  margin-bottom: 20px;
-}
-
-.form-field {
-  margin-bottom: 15px;
-}
-
-label {
-  display: block;
-  margin-bottom: 5px;
-}
-
-legend {
+  font-size: 2.4rem;
   font-weight: bold;
-  margin-bottom: 10px;
+  margin-bottom: 3.2rem;
 }
-
-.btn {
-  padding: 10px 20px;
-  margin-top: 10px;
-  cursor: pointer;
-}
-
-.btn-back {
-  background-color: #ccc;
-}
-
-.btn-buy {
-  background-color: #4caf50;
-  color: white;
-}
-
-/* Final section */
-.section-final {
-  text-align: center;
-  padding: 20px;
-}
-
-.bike-img--final {
-  max-width: 100%;
-  margin-bottom: 20px;
-}
-
 
 .form-field {
+  width: 80rem;
   display: flex;
-  width: 100%;
+  border: none;
+}
+.accessories {
+  display: flex;
+  gap: 2rem;
 }
 .pack {
-  border: 1px solid #ccc;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 3.4rem;
+  box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.075);
   border-radius: 0.5rem;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  width: 33%;
+  overflow: hidden;
+
+  .pack-name {
+    margin-bottom: 1.2rem;
+    padding: 2.2rem;
+    background-color: #e67e22;
+
+    text-align: center;
+    font-size: 2.4rem;
+    text-transform: uppercase;
+  }
+
+  ul {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 1.2rem;
+    list-style: none;
+    margin-bottom: 1.2rem;
+
+    li {
+      font-size: 1.4rem;
+      text-transform: uppercas;
+    }
+  }
+
+  .pack--price {
+    text-align: center;
+    font-size: 2.4rem;
+  }
+
+  .btn {
+    margin-top: 1.2rem;
+    padding: 1.2rem;
+    border-radius: 0;
+    border: none;
+  }
+
+  .btn-add {
+    background-color: rgb(0, 188, 0);
+  }
+
+  .btn-remove {
+    background-color: rgb(255, 63, 63);
+  }
 }
-
-.pack p {
-  font-weight: bold;
-}
-
-.pack ul {
-  list-style-type: none;
-  margin-bottom: 10px;
-}
-
-.pack li {
-  margin-left: 20px;
-}
-
-.pack--price {
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.selected-pack--container {
-  text-align: left;
-  margin-bottom: 20px;
-}
-
-.selected-pack--txt {
-  font-weight: bold;
-}
-
-.hidden {
-  display: none;
-}
-
-
-/* buttons */

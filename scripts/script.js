@@ -1,5 +1,6 @@
 // Elements
 const $mainSection = document.querySelector('.section-main');
+const $formSection = document.querySelector('.section-form');
 const $bikeList = document.querySelector('.list-bike');
 const $bikeEl = document.querySelector('.bike');
 const $totalPriceEl = document.getElementById('total-price');
@@ -73,10 +74,10 @@ const accessories = {
 const { sportPackPrice, streetPackPrice, travelPackPrice } = accessories;
 
 // Variables
-let $totalPrice;
-let $selectedBike;
+let totalPrice;
+let selectedBike;
 
-///
+// Accesories prices
 $sportPackPriceEl.textContent = `${sportPackPrice} PLN`;
 $streetPackPriceEl.textContent = `${streetPackPrice} PLN`;
 $travelPackPriceEl.textContent = `${travelPackPrice} PLN`;
@@ -96,21 +97,20 @@ function displayBikes(bikeList) {
     const markup = `
       <li class="bike" data-index="${index}">
         <img
-          class="bike__img"
+          class="bike-img"
           src="assets/bike-${bike.imgIndex}.jpg"
           alt="${bike.brand} ${bike.model}"
         />
-        <div class="bike__description">
-          <p class="bike__description--name">${bike.brand} ${bike.model}</p>
-          <div class="bike__description--stats">
-            <p class="bike__description--year">${bike.year}</p>
-            <p class="bike__description--mileage">${bike.mileage} km</p>
-            <p class="bike__description--power">${bike.power} KM</p>
+        <div class="bike-description">
+          <p class="bike-description--name">${bike.brand} ${bike.model}</p>
+          <div class="bike-description--stats">
+            <p class="bike-description--year">${bike.year}</p>
+            <p class="bike-description--mileage">${bike.mileage} km</p>
+            <p class="bike-description--power">${bike.power} KM</p>
           </div>
-          <p class="bike__description--price">${bike.price} PLN</p>
+          <p class="bike-description--price">${bike.price} PLN</p>
         </div>
-      </li>
-    `;
+      </li>`;
     $bikeList.insertAdjacentHTML('beforeend', markup);
   });
 }
@@ -124,12 +124,13 @@ const getBikeInfoOnClick = function (e) {
     const clickedBikeData = bikeData[bikeIndex];
     console.log(clickedBikeData);
 
-    $totalPrice = clickedBikeData.price;
-    $totalPriceEl.textContent = `${$totalPrice} PLN`;
-    $selectedBike = clickedBikeData;
-    console.log($selectedBike);
+    totalPrice = clickedBikeData.price;
+    $totalPriceEl.textContent = `${totalPrice} PLN`;
+    selectedBike = clickedBikeData;
+    console.log(selectedBike);
     $selectedBikeBrandEl.textContent = `${clickedBikeData.brand} ${clickedBikeData.model}`;
     $mainSection.classList.add('hidden');
+    $formSection.classList.remove('hidden');
 
     // Reset buttons
     $btnSportPackAdd.disabled = false;
@@ -144,10 +145,10 @@ $bikeList.addEventListener('click', getBikeInfoOnClick);
 
 // Function to handle adding accessory price to total price
 function addAccessoryPriceToTotalPrice(accessoryPrice, $btnAdd, $btnRemove) {
-  if (!$totalPrice) return; // Return if no bike is selected
+  if (!totalPrice) return; // Return if no bike is selected
 
-  $totalPrice += accessoryPrice;
-  $totalPriceEl.textContent = `${$totalPrice} PLN`;
+  totalPrice += accessoryPrice;
+  $totalPriceEl.textContent = `${totalPrice} PLN`;
 
   $btnAdd.disabled = true;
   $btnRemove.disabled = false;
@@ -190,10 +191,10 @@ function removeAccessoryPriceFromTotalPrice(
   $btnAdd,
   $btnRemove
 ) {
-  if (!$totalPrice) return; // Return if no bike is selected
+  if (!totalPrice) return; // Return if no bike is selected
 
-  $totalPrice -= accessoryPrice;
-  $totalPriceEl.textContent = `${$totalPrice} PLN`;
+  totalPrice -= accessoryPrice;
+  $totalPriceEl.textContent = `${totalPrice} PLN`;
 
   $btnAdd.disabled = false;
   $btnRemove.disabled = true;
@@ -233,8 +234,8 @@ $btnTravelPackRemove.addEventListener('click', function (e) {
 // form handling
 $btnPurchase.addEventListener('click', function (e) {
   e.preventDefault();
-  const html = `<img class="bike-img--final" src="assets/bike-${$selectedBike.imgIndex}.jpg" alt="bike photo" />
-  <p class="thanking-text">Dziękujemy za zakup ${$selectedBike.brand} ${$selectedBike.model}</p>
+  const html = `<img class="bike-img--final" src="assets/bike-${selectedBike.imgIndex}.jpg" alt="bike photo" />
+  <p class="thanking-text">Dziękujemy za zakup ${selectedBike.brand} ${selectedBike.model}</p>
   <p class="delivery-txt">Motocykl zostanie dostarczony 20/05/2024</p>`;
 
   $finalSection.insertAdjacentHTML('afterbegin', html);

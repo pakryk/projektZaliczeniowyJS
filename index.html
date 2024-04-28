@@ -8,135 +8,142 @@
     <script defer src="scripts/script.js"></script>
   </head>
   <body>
-    <!-- MAIN SECTION -->
-    <section class="section-main">
-      <header class="header">
-        <h1 class="header-title">MotoShop</h1>
-        <input class="input header-input" type="text" placeholder="szukaj" />
-      </header>
-      <main class="main">
-        <ul class="list-bike">
-          <!-- Bikes dynamically loaded here -->
-        </ul>
-      </main>
-    </section>
+    <div class="container">
+      <!-- MAIN SECTION -->
+      <section class="section-main">
+        <header class="header">
+          <h1 class="header-title">MotoShop</h1>
+          <input class="input header-input" type="text" placeholder="szukaj" />
+        </header>
+        <main class="main">
+          <ul class="list-bike">
+            <!-- Bikes dynamically loaded here -->
+          </ul>
+        </main>
+      </section>
 
-    <!-- BUYING SECTION -->
-    <section class="section-form">
-      <!-- selected bike -->
-      <div class="selected-bike--container">
-        <p class="selected-bike--txt">
-          Wybrany motocykl:
-          <span class="selected-bike--brand">Yamaha XSR 900</span>
-        </p>
-      </div>
+      <!-- FORM SECTION -->
+      <section class="section-form">
+        <!-- selected bike -->
+        <div class="selected-bike--container">
+          <p class="selected-bike--txt">
+            Wybrany motocykl:
+            <span class="selected-bike--brand">Yamaha XSR 900</span>
+          </p>
+        </div>
 
-      <form class="form" action="#">
-        <p class="form-title">Formularz zakupowy</p>
-        <fieldset class="form-field">
-          <legend>Akcesoria</legend>
-          <div class="pack sport-pack">
-            <p>Sport pack</p>
-            <ul>
-              <li>sportowy wydech</li>
-              <li>sportowe zawieszenie</li>
-              <li>crash pady</li>
-            </ul>
-            <p class="sport-pack--price">1500</p>
-            <button type="button" class="btn btn-add btn-add--sport">
-              Dodaj
-            </button>
-            <button
-              type="button"
-              class="btn btn-remove btn-remove--sport hidden"
-            >
-              Usuń
-            </button>
-          </div>
-          <div class="pack travel-pack">
-            <p>Travel pack</p>
-            <ul>
-              <li>boczne kufry</li>
-              <li>tank bag</li>
-              <li>kufer centralny</li>
-            </ul>
-            <p class="travel-pack--price">7500</p>
-            <button type="button" class="btn btn-add btn-add--travel">
-              Dodaj
-            </button>
-            <button
-              type="button"
-              class="btn btn-remove btn-remove--travel hidden"
-            >
-              Usuń
-            </button>
-          </div>
-          <div class="pack street-pack">
-            <p>Street pack</p>
-            <ul>
-              <li>tank paymentMethod</li>
-              <li>osłona lampy</li>
-              <li>mała owiewka</li>
-            </ul>
-            <p class="street-pack--price">5500</p>
-            <button type="button" class="btn btn-add btn-add--street">
-              Dodaj
-            </button>
-            <button
-              type="button"
-              class="btn btn-remove btn-remove--street hidden"
-            >
-              Usuń
-            </button>
-          </div>
-        </fieldset>
-        <fieldset class="form-field">
-          <label for="name">Imię i nazwisko:</label>
-          <input type="text" name="name" id="name" required />
-        </fieldset>
-        <fieldset class="form-field">
-          <label for="destination">Miejsce odbioru:</label>
-          <input type="text" name="destination" id="destination" required />
-        </fieldset>
-        <fieldset class="form-field">
-          <label for="date">Data odbioru:</label>
-          <input type="date" name="date" id="date" required min="2024-04-29" />
-        </fieldset>
-        <fieldset class="form-field">
-          <legend>Sposób płatności</legend>
-          <div>
+        <form class="form" action="#">
+          <p class="form-title">Formularz zakupowy</p>
+          <fieldset class="form-field accessories">
+            <div class="pack sport-pack">
+              <p class="pack-name">Sport pack</p>
+              <ul>
+                <li>sportowy wydech</li>
+                <li>sportowe zawieszenie</li>
+                <li>crash pady</li>
+              </ul>
+              <p class="sport-pack--price pack--price">1500</p>
+              <button type="button" class="btn btn-add btn-add--sport">
+                Dodaj
+              </button>
+              <button
+                type="button"
+                class="btn btn-remove btn-remove--sport hidden"
+              >
+                Usuń
+              </button>
+            </div>
+            <div class="pack travel-pack">
+              <p class="pack-name">Travel pack</p>
+              <ul>
+                <li>boczne kufry</li>
+                <li>tank bag</li>
+                <li>kufer centralny</li>
+              </ul>
+              <p class="travel-pack--price pack--price">7500</p>
+              <button type="button" class="btn btn-add btn-add--travel">
+                Dodaj
+              </button>
+              <button
+                type="button"
+                class="btn btn-remove btn-remove--travel hidden"
+              >
+                Usuń
+              </button>
+            </div>
+            <div class="pack street-pack">
+              <p class="pack-name">Street pack</p>
+              <ul>
+                <li>tank pad</li>
+                <li>osłona lampy</li>
+                <li>mała owiewka</li>
+              </ul>
+              <p class="street-pack--price pack--price">5500</p>
+              <button type="button" class="btn btn-add btn-add--street">
+                Dodaj
+              </button>
+              <button
+                type="button"
+                class="btn btn-remove btn-remove--street hidden"
+              >
+                Usuń
+              </button>
+            </div>
+          </fieldset>
+          <fieldset class="form-field">
+            <label for="name">Imię i nazwisko:</label>
+            <input type="text" name="name" id="name" required />
+          </fieldset>
+          <fieldset class="form-field">
+            <label for="destination">Miejsce odbioru:</label>
+            <input type="text" name="destination" id="destination" required />
+          </fieldset>
+          <fieldset class="form-field">
+            <label for="date">Data odbioru:</label>
             <input
-              type="radio"
-              name="paymentMethod"
-              id="cash"
-              value="Gotówka"
-              checked
+              type="date"
+              name="date"
+              id="date"
+              required
+              min="2024-04-29"
             />
-            <label for="cash">Gotówka</label>
-            <input
-              type="radio"
-              name="paymentMethod"
-              id="leasing"
-              value="Leasing"
-            />
-            <label for="leasing">Leasing</label>
-          </div>
-        </fieldset>
+          </fieldset>
+          <fieldset class="form-field">
+            <legend>Sposób płatności</legend>
+            <div>
+              <input
+                type="radio"
+                name="paymentMethod"
+                id="cash"
+                value="Gotówka"
+                checked
+              />
+              <label for="cash">Gotówka</label>
+              <input
+                type="radio"
+                name="paymentMethod"
+                id="leasing"
+                value="Leasing"
+              />
+              <label for="leasing">Leasing</label>
+            </div>
+          </fieldset>
 
-        <fieldset class="form-field">
-          <legend>Cena całkowita</legend>
-          <p id="total-price">52000 PLN</p>
-        </fieldset>
-        <button class="btn btn-back">Powrót do wyboru</button>
-        <button class="btn btn-buy" >Zakup</button>
-      </form>
-    </section>
+          <fieldset class="form-field">
+            <legend>Cena całkowita</legend>
+            <p id="total-price">52000 PLN</p>
+          </fieldset>
+          <button class="btn btn-back">Powrót do wyboru</button>
+          <button class="btn btn-buy">Zakup</button>
+        </form>
+      </section>
 
-    <!-- FINAL SECTION -->
-    <section class="section-final">
-      <img class="bike-img--final" src="assets/bike-0.jpg" alt="bike photo" />
-      <p class="thanking-text">Dziękujemy za zakup Yamaha XSR 900</p>
-      <p class="delivery-txt">Motocykl zostanie dostarczony 20/05/2024</p>
-    </section>
+      <!-- FINAL SECTION -->
+      <section class="section-final hidden">
+        <img class="bike-img--final" src="assets/bike-0.jpg" alt="bike photo" />
+        <p class="thanking-text">Dziękujemy za zakup Yamaha XSR 900</p>
+        <p class="delivery-txt">Motocykl zostanie dostarczony 20/05/2024</p>
+      </section>
+    </div>
   </body>
 </html>
