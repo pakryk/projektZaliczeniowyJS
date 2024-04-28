@@ -18,6 +18,11 @@ const $btnTravelPackAdd = document.querySelector('.btn-add--travel');
 const $btnSportPackRemove = document.querySelector('.btn-remove--sport');
 const $btnStreetPackRemove = document.querySelector('.btn-remove--street');
 const $btnTravelPackRemove = document.querySelector('.btn-remove--travel');
+const $btnPurchase = document.querySelector('.btn-buy');
+
+// Final section elements
+const $finalSection = document.querySelector('.section-final');
+const $finalImg = document.querySelector('.bike-img--final');
 
 // Bike data
 const bikeData = [
@@ -223,4 +228,14 @@ $btnTravelPackRemove.addEventListener('click', function (e) {
     $btnTravelPackAdd,
     $btnTravelPackRemove
   );
+});
+
+// form handling
+$btnPurchase.addEventListener('click', function (e) {
+  e.preventDefault();
+  const html = `<img class="bike-img--final" src="assets/bike-${$selectedBike.imgIndex}.jpg" alt="bike photo" />
+  <p class="thanking-text">Dziękujemy za zakup ${$selectedBike.brand} ${$selectedBike.model}</p>
+  <p class="delivery-txt">Motocykl zostanie dostarczony 20/05/2024</p>`;
+
+  $finalSection.insertAdjacentHTML('afterbegin', html);
 });
