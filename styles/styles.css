@@ -82,110 +82,133 @@ body {
   overflow-x: hidden;
 }
 
-/* main section */
+/* Main section */
 .section-main {
-  background-color: #fdf2e9;
-}
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 2.4rem;
-
-  padding: 6.4rem;
-
-  .header__title {
-    color: red;
-
-    &:hover {
-      color: blueviolet;
-    }
-  }
-
-  .header__input {
-    padding: 2rem;
-  }
-}
-
-.input {
-  border: none;
-  border-radius: 1rem;
-}
-
-.main {
-  background-color: #555;
-}
-.list__bike {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 2rem;
-}
-.bike {
-  width: 24rem;
-  border-radius: 1rem;
-  overflow: hidden;
-  background-color: #fff;
-}
-.bike__img {
-  width: 24rem;
-}
-.bike__description {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  padding: 1.8rem;
-}
-.bike__description--name {
-  font-size: 2rem;
-}
-.bike__description--stats {
-  display: flex;
-  gap: 1rem;
-}
-.bike__description--year {
-}
-.bike__description--mileage {
-}
-.bike__description--power {
-}
-.bike__description--price {
-  font-size: 1.8rem;
-  color: red;
-}
-
-/* BUYING SECTION */
-
-.section-buying {
-}
-.selected-bike__container {
   text-align: center;
+  padding: 2rem;
 }
-.accessories-container {
+
+.header {
+  margin-bottom: 2rem;
+}
+
+.header-title {
+  color: #e67e22;
+  font-size: 2rem;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.header-input {
+  width: rem;
+  border: none;
+  background-color: #fdf2e9;
+  padding: 2rem;
+  border-radius: 0.5rem;
+
+  &::placeholder {
+    color: #45260a;
+  }
+}
+
+/* Form section */
+.section-form {
+  text-align: center;
+  padding: 20px;
+}
+
+.selected-bike--txt {
+  font-weight: bold;
+}
+
+.form-title {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.form-field {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+legend {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.btn {
+  padding: 10px 20px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.btn-back {
+  background-color: #ccc;
+}
+
+.btn-buy {
+  background-color: #4caf50;
+  color: white;
+}
+
+/* Final section */
+.section-final {
+  text-align: center;
+  padding: 20px;
+}
+
+.bike-img--final {
+  max-width: 100%;
+  margin-bottom: 20px;
+}
+
+
+.form-field {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 5rem;
+  width: 100%;
 }
-.accessories__title {
-}
-.accessories {
-}
-.accessories__sport {
-}
-.accessories__name {
-}
-.accessories__list {
-}
-.accessories__item {
+.pack {
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  width: 33%;
 }
 
-.accessories__price {
+.pack p {
+  font-weight: bold;
 }
 
-/* hidden class */
+.pack ul {
+  list-style-type: none;
+  margin-bottom: 10px;
+}
+
+.pack li {
+  margin-left: 20px;
+}
+
+.pack--price {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.selected-pack--container {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.selected-pack--txt {
+  font-weight: bold;
+}
 
 .hidden {
   display: none;
 }
+
+
+/* buttons */

@@ -5,108 +5,136 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MotoShop</title>
     <link rel="stylesheet" href="styles/styles.css" />
-    <script defer src="scripts/script.js"></script>
   </head>
   <body>
     <!-- MAIN SECTION -->
     <section class="section-main">
       <header class="header">
-        <h1 class="header__title">MotoShop</h1>
-        <input class="input header__input" type="text" placeholder="szukaj" />
+        <h1 class="header-title">MotoShop</h1>
+        <input class="input header-input" type="text" placeholder="szukaj" />
       </header>
       <main class="main">
-        <ul class="list__bike">
-          <li class="bike">
-            <img
-              class="bike__img"
-              src="assets/bike-0.jpg"
-              alt="Yamaha XSR 900"
-            />
-            <div class="bike__description">
-              <p class="bike__description--name">Yamaha XSR 900</p>
-              <div class="bike__description--stats">
-                <p class="bike__description--year">2022</p>
-                <p class="bike__description--mileage">5000 km</p>
-                <p class="bike__description--power">117 KM</p>
-              </div>
-              <p class="bike__description--price">52000 PLN</p>
-            </div>
-          </li>
+        <ul class="list-bike">
+          <!-- Bikes dynamically loaded here -->
         </ul>
       </main>
     </section>
 
     <!-- BUYING SECTION -->
-    <section class="section-buying">
+    <section class="section-form">
       <!-- selected bike -->
-      <div class="selected-bike__container">
-        <p class="selected-bike__name">Wybrany motocykl: Yamaha XSR 900</p>
-        <p class="selected-bike__price">10000 PLN</p>
+      <div class="selected-bike--container">
+        <p class="selected-bike--txt">
+          Wybrany motocykl:
+          <span class="selected-bike--brand">Yamaha XSR 900</span>
+        </p>
       </div>
-      <!-- accessories -->
-      <p class="accessories__title">Pakiety dodatkowe:</p>
-      <div class="accessories-container">
-        <figure class="accessories accessories__sport">
-          <p class="accessories__name">SPORT PACK</p>
-          <ul class="accessories__list">
-            <li class="accessories__item">wydech</li>
-            <li class="accessories__item">wydech</li>
-            <li class="accessories__item">wydech</li>
-            <li class="accessories__item">wydech</li>
-          </ul>
-          <p class="accessories__price sport-pack__price">7500 PLN</p>
-        </figure>
 
-        <figure class="accessories accessories__street">
-          <p class="accessories__name">STREET PACK</p>
-          <ul class="accessories__list">
-            <li class="accessories__item">wydech</li>
-            <li class="accessories__item">wydech</li>
-            <li class="accessories__item">wydech</li>
-            <li class="accessories__item">wydech</li>
-          </ul>
-          <p class="accessories__price street-pack__price">7500 PLN</p>
-        </figure>
+      <form class="form" action="#">
+        <p class="form-title">Formularz zakupowy</p>
+        <fieldset class="form-field">
+          <legend>Akcesoria</legend>
+          <div class="pack sport-pack">
+            <p>Sport pack</p>
+            <ul>
+              <li>sportowy wydech</li>
+              <li>sportowe zawieszenie</li>
+              <li>crash pady</li>
+            </ul>
+            <p class="sport-pack--price">1500</p>
+            <button type="button" class="btn btn-add btn-add--sport">
+              Dodaj
+            </button>
+            <button
+              type="button"
+              class="btn btn-remove btn-remove--sport hidden"
+            >
+              Usuń
+            </button>
+          </div>
+          <div class="pack travel-pack">
+            <p>Travel pack</p>
+            <ul>
+              <li>boczne kufry</li>
+              <li>tank bag</li>
+              <li>kufer centralny</li>
+            </ul>
+            <p class="travel-pack--price">7500</p>
+            <button type="button" class="btn btn-add btn-add--travel">
+              Dodaj
+            </button>
+            <button
+              type="button"
+              class="btn btn-remove btn-remove--travel hidden"
+            >
+              Usuń
+            </button>
+          </div>
+          <div class="pack street-pack">
+            <p>Street pack</p>
+            <ul>
+              <li>tank paymentMethod</li>
+              <li>osłona lampy</li>
+              <li>mała owiewka</li>
+            </ul>
+            <p class="street-pack--price">5500</p>
+            <button type="button" class="btn btn-add btn-add--street">
+              Dodaj
+            </button>
+            <button type="button" class="btn btn-remove btn-remove--street hidden">
+              Usuń
+            </button>
+          </div>
+        </fieldset>
+        <fieldset class="form-field">
+          <label for="name">Imię i nazwisko:</label>
+          <input type="text" name="name" id="name" required />
+        </fieldset>
+        <fieldset class="form-field">
+          <label for="destination">Miejsce odbioru:</label>
+          <input type="text" name="destination" id="destination" required />
+        </fieldset>
+        <fieldset class="form-field">
+          <label for="date">Data odbioru:</label>
+          <input type="date" name="date" id="date" required min="2024-04-29" />
+        </fieldset>
+        <fieldset class="form-field">
+          <legend>Sposób płatności</legend>
+          <div>
+            <input
+              type="radio"
+              name="paymentMethod"
+              id="cash"
+              value="Gotówka"
+              checked
+            />
+            <label for="cash">Gotówka</label>
+            <input
+              type="radio"
+              name="paymentMethod"
+              id="leasing"
+              value="Leasing"
+            />
+            <label for="leasing">Leasing</label>
+          </div>
+        </fieldset>
 
-        <figure class="accessories accessories__travel">
-          <p class="accessories__name">WEEKEND PACK</p>
-          <ul class="accessories__list">
-            <li class="accessories__item">wydech</li>
-            <li class="accessories__item">wydech</li>
-            <li class="accessories__item">wydech</li>
-            <li class="accessories__item">wydech</li>
-          </ul>
-          <p class="accessories__price weekend-pack__price">7500 PLN</p>
-        </figure>
-      </div>
-      <!-- buyer data -->
-      <p class="buyer-title">TWOJE DANE</p>
-
-      <form action="" class="form">
-        <label for="name">Imię i nazwisko</label>
-        <input id="name" type="text" />
-        <label for="destination">Miejsce odbioru</label>
-        <input id="destination" type="text" />
-        <label for="date">Data odbioru</label>
-        <input type="date" id="date" />
-        <div class="pricing">
-          <p class="pricing__title">metoda płatności</p>
-          <label for="leasing">Leasing</label>
-          <input id="leasing" type="radio" name="payment-method" />
-          <label for="cash">Gotówka</label>
-          <input id="cash" type="radio" name="payment-method" />
-        </div>
+        <fieldset class="form-field">
+          <legend>Cena całkowita</legend>
+          <p id="total-price">52000 PLN</p>
+        </fieldset>
+        <button class="btn btn-back">Powrót do wyboru</button>
+        <button class="btn btn-buy" type="submit">Zakup</button>
       </form>
-      <button class="btn btn__back">powrót</button>
-      <button type="submit" class="btn btn__buy">ZAKUP</button>
     </section>
-    
+
     <!-- FINAL SECTION -->
-    <section class="section-final hidden">
-      <img class="bike__img" src="assets/bike-0.jpg" alt="bike photo" />
+    <section class="section-final">
+      <img class="bike-img--final" src="assets/bike-0.jpg" alt="bike photo" />
       <p class="thanking-text">Dziękujemy za zakup Yamaha XSR 900</p>
       <p class="delivery-txt">Motocykl zostanie dostarczony 20/05/2024</p>
-      <button class="btn btn__main-page">strona główna</button>
     </section>
+
+    <script src="scripts/script.js" defer></script>
   </body>
 </html>

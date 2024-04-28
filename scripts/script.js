@@ -1,50 +1,23 @@
-// Selecting DOM elements
-const header = document.querySelector('.header');
-const headerTitle = document.querySelector('.header__title');
-const headerInput = document.querySelector('.header__input');
+// Elements
+const $mainSection = document.querySelector('.section-main');
+const $bikeList = document.querySelector('.list-bike');
+const $bikeEl = document.querySelector('.bike');
+const $totalPriceEl = document.getElementById('total-price');
 
-const main = document.querySelector('.main');
-const listBike = document.querySelector('.list__bike');
-const bikeImg = document.querySelector('.bike__img');
-const bikeName = document.querySelector('.bike__description--name');
-const bikePrice = document.querySelector('.bike__description--price');
+const $selectedBikeBrandEl = document.querySelector('.selected-bike--brand');
 
-const selectedBikeContainer = document.querySelector(
-  '.selected-bike__container'
-);
-const selectedBikeName = document.querySelector('.selected-bike__name');
-const selectedBikePrice = document.querySelector('.selected-bike__price');
-const sportPackPrice = document.querySelector('.sport-pack__price');
-const weekendPackPrice = document.querySelector('.weekend-pack__price');
-const streetPackPrice = document.querySelector('.street-pack__price');
+// Accesories prices
+const $sportPackPriceEl = document.querySelector('.sport-pack--price');
+const $streetPackPriceEl = document.querySelector('.street-pack--price');
+const $travelPackPriceEl = document.querySelector('.travel-pack--price');
 
-const accessoriesContainer = document.querySelector('.accessories-container');
-const accessoriesTitle = document.querySelector('.accessories__title');
-const accessoriesSport = document.querySelector('.accessories__sport');
-const accessoriesStreet = document.querySelector('.accessories__street');
-const accessoriesTravel = document.querySelector('.accessories__travel');
-const accessoriesName = document.querySelectorAll('.accessories__name');
-const accessoriesList = document.querySelectorAll('.accessories__list');
-const accessoriesItem = document.querySelectorAll('.accessories__item');
-const accessoriesPrice = document.querySelectorAll('.accessories__price');
-
-const buyerTitle = document.querySelector('.buyer-title');
-const form = document.querySelector('.form');
-const nameInput = document.querySelector('#name');
-const destinationInput = document.querySelector('#destination');
-const dateInput = document.querySelector('#date');
-const pricing = document.querySelector('.pricing');
-const leasingRadio = document.querySelector('#leasing');
-const cashRadio = document.querySelector('#cash');
-
-const backButton = document.querySelector('.btn__back');
-const buyButton = document.querySelector('.btn__buy');
-
-const finalSection = document.querySelector('.section-final');
-const finalBikeImg = document.querySelector('.bike__img');
-const thankingText = document.querySelector('.thanking-text');
-const deliveryText = document.querySelector('.delivery-txt');
-const mainPageButton = document.querySelector('.btn__main-page');
+// Buttons
+const $btnSportPackAdd = document.querySelector('.btn-add--sport');
+const $btnStreetPackAdd = document.querySelector('.btn-add--street');
+const $btnTravelPackAdd = document.querySelector('.btn-add--travel');
+const $btnSportPackRemove = document.querySelector('.btn-remove--sport');
+const $btnStreetPackRemove = document.querySelector('.btn-remove--street');
+const $btnTravelPackRemove = document.querySelector('.btn-remove--travel');
 
 // Bike data
 const bikeData = [
@@ -56,11 +29,6 @@ const bikeData = [
     mileage: 2200,
     price: 52000,
     imgIndex: 0,
-    accessories: {
-      sportPack: 1500,
-      streetPack: 2000,
-      weekendPack: 3000,
-    },
   },
   {
     brand: 'Triumph',
@@ -70,11 +38,6 @@ const bikeData = [
     mileage: 2200,
     price: 65000,
     imgIndex: 1,
-    accessories: {
-      sportPack: 4500,
-      streetPack: 5000,
-      weekendPack: 6000,
-    },
   },
   {
     brand: 'Kawasaki',
@@ -84,11 +47,6 @@ const bikeData = [
     mileage: 2200,
     price: 62500,
     imgIndex: 2,
-    accessories: {
-      sportPack: 7500,
-      streetPack: 8000,
-      weekendPack: 9000,
-    },
   },
   {
     brand: 'Ducati',
@@ -98,17 +56,37 @@ const bikeData = [
     mileage: 2200,
     price: 100000,
     imgIndex: 3,
-    accessories: {
-      sportPack: 10500,
-      streetPack: 11000,
-      weekendPack: 12000,
-    },
   },
 ];
 
+const accessories = {
+  sportPackPrice: 10500,
+  streetPackPrice: 7000,
+  travelPackPrice: 6500,
+};
+
+const { sportPackPrice, streetPackPrice, travelPackPrice } = accessories;
+
+// Variables
+let $totalPrice;
+let $selectedBike;
+
+///
+$sportPackPriceEl.textContent = `${sportPackPrice} PLN`;
+$streetPackPriceEl.textContent = `${streetPackPrice} PLN`;
+$travelPackPriceEl.textContent = `${travelPackPrice} PLN`;
+
+// Buttons State
+$btnSportPackAdd.disabled = false;
+$btnStreetPackAdd.disabled = false;
+$btnTravelPackAdd.disabled = false;
+$btnSportPackRemove.disabled = false;
+$btnStreetPackRemove.disabled = false;
+$btnTravelPackRemove.disabled = false;
+
 // Function to display list of bikes
 function displayBikes(bikeList) {
-  listBike.innerHTML = '';
+  $bikeList.innerHTML = '';
   bikeList.forEach((bike, index) => {
     const markup = `
       <li class="bike" data-index="${index}">
@@ -128,52 +106,121 @@ function displayBikes(bikeList) {
         </div>
       </li>
     `;
-    listBike.insertAdjacentHTML('beforeend', markup);
+    $bikeList.insertAdjacentHTML('beforeend', markup);
   });
 }
-
-// Display all bikes initially
 displayBikes(bikeData);
 
-const bikeFilter = function () {
-  const query = headerInput.value.toLowerCase();
+// Cicked bike handler
+const getBikeInfoOnClick = function (e) {
+  const $clickedBike = e.target.closest('.bike');
+  if ($clickedBike) {
+    const bikeIndex = $clickedBike.dataset.index;
+    const clickedBikeData = bikeData[bikeIndex];
+    console.log(clickedBikeData);
 
-  const filteredBikes = bikeData.filter(bike =>
-    bike.brand.toLowerCase().includes(query)
+    $totalPrice = clickedBikeData.price;
+    $totalPriceEl.textContent = `${$totalPrice} PLN`;
+    $selectedBike = clickedBikeData;
+    console.log($selectedBike);
+    $selectedBikeBrandEl.textContent = `${clickedBikeData.brand} ${clickedBikeData.model}`;
+    $mainSection.classList.add('hidden');
+
+    // Reset buttons
+    $btnSportPackAdd.disabled = false;
+    $btnStreetPackAdd.disabled = false;
+    $btnTravelPackAdd.disabled = false;
+    $btnSportPackRemove.disabled = true;
+    $btnStreetPackRemove.disabled = true;
+    $btnTravelPackRemove.disabled = true;
+  }
+};
+$bikeList.addEventListener('click', getBikeInfoOnClick);
+
+// Function to handle adding accessory price to total price
+function addAccessoryPriceToTotalPrice(accessoryPrice, $btnAdd, $btnRemove) {
+  if (!$totalPrice) return; // Return if no bike is selected
+
+  $totalPrice += accessoryPrice;
+  $totalPriceEl.textContent = `${$totalPrice} PLN`;
+
+  $btnAdd.disabled = true;
+  $btnRemove.disabled = false;
+
+  $btnAdd.classList.add('hidden');
+  $btnRemove.classList.remove('hidden');
+}
+
+// Event listeners for adding accessories to total price
+$btnSportPackAdd.addEventListener('click', function (e) {
+  e.preventDefault();
+  addAccessoryPriceToTotalPrice(
+    sportPackPrice,
+    $btnSportPackAdd,
+    $btnSportPackRemove
   );
-
-  return filteredBikes;
-};
-
-// Add click event listener to each bike
-listBike.addEventListener('click', function (event) {
-  const clickedBike = event.target.closest('.bike');
-  if (!clickedBike) return;
-
-  // Pobranie indeksu klikniętego roweru
-  const index = clickedBike.dataset.index;
-
-  // Pobranie danych klikniętego roweru z tablicy bikeData
-  const selectedBike = bikeFilter()[index];
-
-  // Przykładowe wykorzystanie danych klikniętego roweru
-  console.log(selectedBike.brand);
-  console.log(selectedBike.model);
-  console.log(selectedBike.price);
-
-  displaySelectedbike(selectedBike);
 });
 
-// Event listener on searchbar
-headerInput.addEventListener('input', function () {
-  displayBikes(bikeFilter());
+$btnStreetPackAdd.addEventListener('click', function (e) {
+  e.preventDefault();
+  addAccessoryPriceToTotalPrice(
+    streetPackPrice,
+    $btnStreetPackAdd,
+    $btnStreetPackRemove
+  );
 });
 
-// Adding values of selected bike to buing section
-const displaySelectedbike = function (bike) {
-  selectedBikeName.textContent = `Wybrany motocykl: ${bike.brand} ${bike.model}`;
-  selectedBikePrice.textContent = `${bike.price} PLN`;
-  sportPackPrice.textContent = `${bike.accessories.sportPack} PLN`;
-  weekendPackPrice.textContent = `${bike.accessories.weekendPack} PLN`;
-  streetPackPrice.textContent = `${bike.accessories.streetPack} PLN`;
-};
+$btnTravelPackAdd.addEventListener('click', function (e) {
+  e.preventDefault();
+  addAccessoryPriceToTotalPrice(
+    travelPackPrice,
+    $btnTravelPackAdd,
+    $btnTravelPackRemove
+  );
+});
+
+// Function to handle removing accessory price from total price
+function removeAccessoryPriceFromTotalPrice(
+  accessoryPrice,
+  $btnAdd,
+  $btnRemove
+) {
+  if (!$totalPrice) return; // Return if no bike is selected
+
+  $totalPrice -= accessoryPrice;
+  $totalPriceEl.textContent = `${$totalPrice} PLN`;
+
+  $btnAdd.disabled = false;
+  $btnRemove.disabled = true;
+
+  $btnAdd.classList.remove('hidden');
+  $btnRemove.classList.add('hidden');
+}
+
+// Event listeners for removing accessories from total price
+$btnSportPackRemove.addEventListener('click', function (e) {
+  e.preventDefault();
+  removeAccessoryPriceFromTotalPrice(
+    sportPackPrice,
+    $btnSportPackAdd,
+    $btnSportPackRemove
+  );
+});
+
+$btnStreetPackRemove.addEventListener('click', function (e) {
+  e.preventDefault();
+  removeAccessoryPriceFromTotalPrice(
+    streetPackPrice,
+    $btnStreetPackAdd,
+    $btnStreetPackRemove
+  );
+});
+
+$btnTravelPackRemove.addEventListener('click', function (e) {
+  e.preventDefault();
+  removeAccessoryPriceFromTotalPrice(
+    travelPackPrice,
+    $btnTravelPackAdd,
+    $btnTravelPackRemove
+  );
+});
