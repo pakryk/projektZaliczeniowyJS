@@ -23,7 +23,7 @@
       </section>
 
       <!-- FORM SECTION -->
-      <section class="section-form">
+      <section class="section-form hidden">
         <!-- selected bike -->
         <div class="selected-bike--container">
           <p class="selected-bike--txt">
@@ -34,7 +34,7 @@
 
         <form class="form" action="#">
           <p class="form-title">Formularz zakupowy</p>
-          <fieldset class="form-field accessories">
+          <div class="accessories">
             <div class="pack sport-pack">
               <p class="pack-name">Sport pack</p>
               <ul>
@@ -89,16 +89,16 @@
                 Usuń
               </button>
             </div>
-          </fieldset>
-          <fieldset class="form-field">
+          </div>
+          <div class="form-field">
             <label for="name">Imię i nazwisko:</label>
             <input type="text" name="name" id="name" required />
-          </fieldset>
-          <fieldset class="form-field">
+          </div>
+          <div class="form-field">
             <label for="destination">Miejsce odbioru:</label>
             <input type="text" name="destination" id="destination" required />
-          </fieldset>
-          <fieldset class="form-field">
+          </div>
+          <div class="form-field">
             <label for="date">Data odbioru:</label>
             <input
               type="date"
@@ -107,42 +107,47 @@
               required
               min="2024-04-29"
             />
-          </fieldset>
-          <fieldset class="form-field">
-            <legend>Sposób płatności</legend>
+          </div>
+          <div class="form-field">
+            <p>Sposób płatności</p>
             <div>
               <input
                 type="radio"
                 name="paymentMethod"
                 id="cash"
+                class="btn-radio"
                 value="Gotówka"
-                checked
+                required
               />
               <label for="cash">Gotówka</label>
               <input
                 type="radio"
                 name="paymentMethod"
                 id="leasing"
+                class="btn-radio"
                 value="Leasing"
+                required
               />
               <label for="leasing">Leasing</label>
             </div>
-          </fieldset>
-
-          <fieldset class="form-field">
+          </div>
+          <div class="form-field">
             <legend>Cena całkowita</legend>
             <p id="total-price">52000 PLN</p>
-          </fieldset>
+          </div>
+          <button type="submit" class="btn btn-buy">Zakup</button>
           <button class="btn btn-back">Powrót do wyboru</button>
-          <button class="btn btn-buy">Zakup</button>
         </form>
+        <p class="error"></p>
       </section>
 
       <!-- FINAL SECTION -->
       <section class="section-final hidden">
         <img class="bike-img--final" src="assets/bike-0.jpg" alt="bike photo" />
-        <p class="thanking-text">Dziękujemy za zakup Yamaha XSR 900</p>
+        <p class="thanking-text">Dziękujemy za zakup</p>
         <p class="delivery-txt">Motocykl zostanie dostarczony 20/05/2024</p>
+        <p class="paying-method">Wybrana forma płatności:</p>
+        <p class="total-price--final">Cena całkowita:</p>
       </section>
     </div>
   </body>

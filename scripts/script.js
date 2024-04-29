@@ -4,7 +4,6 @@ const $formSection = document.querySelector('.section-form');
 const $bikeList = document.querySelector('.list-bike');
 const $bikeEl = document.querySelector('.bike');
 const $totalPriceEl = document.getElementById('total-price');
-
 const $selectedBikeBrandEl = document.querySelector('.selected-bike--brand');
 
 // Accesories prices
@@ -20,10 +19,22 @@ const $btnSportPackRemove = document.querySelector('.btn-remove--sport');
 const $btnStreetPackRemove = document.querySelector('.btn-remove--street');
 const $btnTravelPackRemove = document.querySelector('.btn-remove--travel');
 const $btnPurchase = document.querySelector('.btn-buy');
+const $btnBack = document.querySelector('.btn-back');
+
+// Form section elements
+const $nameInput = document.getElementById('name');
+const $destinationInput = document.getElementById('destination');
+const $dateInput = document.getElementById('date');
+
+const $error = document.querySelector('.error');
 
 // Final section elements
 const $finalSection = document.querySelector('.section-final');
 const $finalImg = document.querySelector('.bike-img--final');
+const $thankingText = document.querySelector('.thanking-text');
+const $deliveryText = document.querySelector('.delivery-txt');
+const $totalPriceFinal = document.querySelector('.total-price--final');
+const $payingMethodFinal = document.querySelector('.paying-method');
 
 // Bike data
 const bikeData = [
@@ -116,29 +127,22 @@ function displayBikes(bikeList) {
 }
 displayBikes(bikeData);
 
-// Cicked bike handler
-const getBikeInfoOnClick = function (e) {
+// Clicked bike handler
+function getBikeInfoOnClick (e) {
   const $clickedBike = e.target.closest('.bike');
   if ($clickedBike) {
     const bikeIndex = $clickedBike.dataset.index;
     const clickedBikeData = bikeData[bikeIndex];
-    console.log(clickedBikeData);
 
     totalPrice = clickedBikeData.price;
     $totalPriceEl.textContent = `${totalPrice} PLN`;
     selectedBike = clickedBikeData;
-    console.log(selectedBike);
     $selectedBikeBrandEl.textContent = `${clickedBikeData.brand} ${clickedBikeData.model}`;
     $mainSection.classList.add('hidden');
     $formSection.classList.remove('hidden');
 
     // Reset buttons
-    $btnSportPackAdd.disabled = false;
-    $btnStreetPackAdd.disabled = false;
-    $btnTravelPackAdd.disabled = false;
-    $btnSportPackRemove.disabled = true;
-    $btnStreetPackRemove.disabled = true;
-    $btnTravelPackRemove.disabled = true;
+    resetButtons();
   }
 };
 $bikeList.addEventListener('click', getBikeInfoOnClick);
@@ -231,12 +235,114 @@ $btnTravelPackRemove.addEventListener('click', function (e) {
   );
 });
 
-// form handling
-$btnPurchase.addEventListener('click', function (e) {
-  e.preventDefault();
-  const html = `<img class="bike-img--final" src="assets/bike-${selectedBike.imgIndex}.jpg" alt="bike photo" />
-  <p class="thanking-text">Dziękujemy za zakup ${selectedBike.brand} ${selectedBike.model}</p>
-  <p class="delivery-txt">Motocykl zostanie dostarczony 20/05/2024</p>`;
+// Function to handle form submission
+function handleSubmit(event) {
+  event.preventDefault();
+  // Elements
+  const $paymentMethod = document.querySelector(
+    'input[name="paymentMethod"]:checked'
+  );
+  // Clear previous errors
+  $error.textContent = '';
 
-  $finalSection.insertAdjacentHTML('afterbegin', html);
+  // Validating name input
+  const nameValue = $nameInput.value.trim();
+  const nameRegex = /^[a-zA-Z]+\s[a-zA-Z]+$/;
+  if (!nameValue || !nameRegex.test(nameValue)) {
+    showError(
+      $nameInput,
+      'Imię i nazwisko muszą zawierać przynajmniej dwa oddzielne słowa.'
+    );
+    return;
+  }
+
+  // Validating destination input
+  const destinationValue = $destinationInput.value.trim();
+  if (!destinationValue) {
+    showError($destinationInput, 'To pole jest wymagane.');
+    return;
+  }
+
+  // Validating date input
+  const currentDate = new Date();
+  const selectedDate = new Date($dateInput.value);
+  const daysDifference = Math.ceil(
+    (selectedDate - currentDate) / (1000 * 60 * 60 * 24)
+  );
+  if (daysDifference < 0 || daysDifference > 14) {
+    showError($dateInput, 'Data dostawy musi być w ciągu najbliższych 14 dni.');
+    return;
+  }
+
+  // Displaying confirmation
+  $formSection.classList.add('hidden');
+  $finalSection.classList.remove('hidden');
+  $finalImg.src = `assets/bike-${selectedBike.imgIndex}.jpg`;
+  $thankingText.textContent = `Dziękujemy za zakup ${selectedBike.brand} ${selectedBike.model}`;
+  const deliveryDate = new Date();
+  deliveryDate.setDate(deliveryDate.getDate() + daysDifference);
+  $deliveryText.textContent = `Motocykl zostanie dostarczony ${deliveryDate.toLocaleDateString()}`;
+  $totalPriceFinal.textContent = `Cena całkowita za zakup: ${totalPrice} PLN`;
+  $payingMethodFinal.textContent = `wybrana forma płatności: ${$paymentMethod.value}`;
+
+  // Reset form
+  resetForm();
+}
+
+// Event listener for form submission
+document.querySelector('form').addEventListener('submit', handleSubmit);
+
+// Function to show error
+function showError(input, message) {
+  let errorEl = input.nextElementSibling;
+  if (!errorEl) {
+    errorEl = document.createElement('p');
+    errorEl.className = 'error';
+    input.parentNode.appendChild(errorEl);
+  }
+  errorEl.textContent = message;
+  errorEl.style.color = 'red';
+}
+
+// Function to hide error
+function hideError(input) {
+  const errorEl = input.nextElementSibling;
+  if (errorEl) {
+    errorEl.textContent = '';
+  }
+}
+
+// Event listener for back button
+$btnBack.addEventListener('click', function () {
+  $finalSection.classList.add('hidden');
+  $formSection.classList.add('hidden');
+  $mainSection.classList.remove('hidden');
 });
+
+// Function to reset form
+function resetForm() {
+  resetButtons();
+  $nameInput.value = '';
+  $destinationInput.value = '';
+  $dateInput.value = '';
+  document.getElementById('cash').checked = false;
+  document.getElementById('leasing').checked = false;
+  $error.textContent = '';
+}
+
+// Function to reset buttons
+function resetButtons() {
+  $btnSportPackAdd.disabled = false;
+  $btnStreetPackAdd.disabled = false;
+  $btnTravelPackAdd.disabled = false;
+  $btnSportPackRemove.disabled = false;
+  $btnStreetPackRemove.disabled = false;
+  $btnTravelPackRemove.disabled = false;
+
+  $btnSportPackAdd.classList.remove('hidden');
+  $btnStreetPackAdd.classList.remove('hidden');
+  $btnTravelPackAdd.classList.remove('hidden');
+  $btnSportPackRemove.classList.add('hidden');
+  $btnStreetPackRemove.classList.add('hidden');
+  $btnTravelPackRemove.classList.add('hidden');
+}
