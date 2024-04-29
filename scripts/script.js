@@ -128,7 +128,7 @@ function displayBikes(bikeList) {
 displayBikes(bikeData);
 
 // Clicked bike handler
-function getBikeInfoOnClick (e) {
+function getBikeInfoOnClick(e) {
   const $clickedBike = e.target.closest('.bike');
   if ($clickedBike) {
     const bikeIndex = $clickedBike.dataset.index;
@@ -144,7 +144,7 @@ function getBikeInfoOnClick (e) {
     // Reset buttons
     resetButtons();
   }
-};
+}
 $bikeList.addEventListener('click', getBikeInfoOnClick);
 
 // Function to handle adding accessory price to total price
@@ -247,13 +247,15 @@ function handleSubmit(event) {
 
   // Validating name input
   const nameValue = $nameInput.value.trim().split(' ');
-if (nameValue.length < 2) {
-  showError(
-    $nameInput,
-    'Imię i nazwisko muszą zawierać przynajmniej dwa oddzielne słowa.'
-  );
-  return;
-}
+  const nameRegex = /^[a-zA-Z]+$/;
+
+  if (nameValue.length < 2 || !nameValue.every(name => nameRegex.test(name))) {
+    showError(
+      $nameInput,
+      'Imię i nazwisko muszą zawierać przynajmniej dwa oddzielne słowa oraz nie mogą zawierać znaków specjalnych oraz cyfr.'
+    );
+    return;
+  }
 
   // Validating destination input
   const destinationValue = $destinationInput.value.trim();
