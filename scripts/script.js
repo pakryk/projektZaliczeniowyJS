@@ -246,15 +246,14 @@ function handleSubmit(event) {
   $error.textContent = '';
 
   // Validating name input
-  const nameValue = $nameInput.value.trim();
-  const nameRegex = /^[a-zA-Z]+\s[a-zA-Z]+$/;
-  if (!nameValue || !nameRegex.test(nameValue)) {
-    showError(
-      $nameInput,
-      'Imię i nazwisko muszą zawierać przynajmniej dwa oddzielne słowa.'
-    );
-    return;
-  }
+  const nameValue = $nameInput.value.trim().split(' ');
+if (nameValue.length < 2) {
+  showError(
+    $nameInput,
+    'Imię i nazwisko muszą zawierać przynajmniej dwa oddzielne słowa.'
+  );
+  return;
+}
 
   // Validating destination input
   const destinationValue = $destinationInput.value.trim();
