@@ -182,6 +182,7 @@ body {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  height: 100vh;
 }
 .selected-bike--container {
   margin-top: 4.2rem;
@@ -279,4 +280,30 @@ body {
 
 .error {
   color: red;
+}
+
+/* final section */
+
+.section-final {
+  text-align: center;
+  margin-top: 5rem;
+}
+
+.bike-img--final {
+  width: 20rem;
+  height: auto;
+  margin-bottom: 2rem;
+}
+
+.thanking-text {
+  font-size: 2.4rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.delivery-txt,
+.paying-method,
+.total-price--final {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
 }
