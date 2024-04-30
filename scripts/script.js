@@ -21,8 +21,11 @@ const $btnStreetPackRemove = document.querySelector('.btn-remove--street');
 const $btnTravelPackRemove = document.querySelector('.btn-remove--travel');
 const $btnPurchase = document.querySelector('.btn-buy');
 const $btnBack = document.querySelector('.btn-back');
-
+const $paymentMethodRadio = document.querySelector(
+  'input[name="paymentMethod"]:checked'
+);
 // Form section elements
+const $form = document.querySelector('.form');
 const $nameInput = document.getElementById('name');
 const $destinationInput = document.getElementById('destination');
 const $dateInput = document.getElementById('date');
@@ -76,7 +79,7 @@ const bikeData = [
   },
 ];
 
-let filteredBikeData = bikeData; // To przechowuje aktualnie wyfiltrowane dane
+let filteredBikeData = bikeData;
 
 const accessories = {
   sportPackPrice: 10500,
@@ -147,7 +150,7 @@ function getBikeInfoOnClick(e) {
   const $clickedBike = e.target.closest('.bike');
   if ($clickedBike) {
     const bikeIndex = $clickedBike.dataset.index;
-    const clickedBikeData = filteredBikeData[bikeIndex]; // zmiana bikeData na filteredBikeData
+    const clickedBikeData = filteredBikeData[bikeIndex];
 
     totalPrice = clickedBikeData.price;
     $totalPrice.textContent = `${totalPrice} PLN`;
@@ -334,12 +337,13 @@ $btnBack.addEventListener('click', function () {
 
 // Function to reset form
 function resetForm() {
-  resetButtons();
   $nameInput.value = '';
   $destinationInput.value = '';
   $dateInput.value = '';
   document.getElementById('cash').checked = false;
   document.getElementById('leasing').checked = false;
+  resetButtons();
+  localStorage.clear();
   $error.textContent = '';
 }
 
@@ -359,3 +363,40 @@ function resetButtons() {
   $btnStreetPackRemove.classList.add('hidden');
   $btnTravelPackRemove.classList.add('hidden');
 }
+
+// Localstorage
+
+// Save form data to localStorage
+function saveFormDataToLocalStorage() {
+  const formData = {
+    name: $nameInput.value,
+    destination: $destinationInput.value,
+    date: $dateInput.value,
+    paymentMethod: document.querySelector('input[name="paymentMethod"]:checked')
+      .value,
+  };
+
+  localStorage.setItem('formData', JSON.stringify(formData));
+}
+
+// Load data from localStorage
+function loadFormDataFromLocalStorage() {
+  const formData = JSON.parse(localStorage.getItem('formData'));
+
+  if (formData) {
+    $nameInput.value = formData.name;
+    $destinationInput.value = formData.destination;
+    $dateInput.value = formData.date;
+    const paymentMethodRadio = document.querySelector(
+      `input[value="${formData.paymentMethod}"]`
+    );
+    if (paymentMethodRadio) {
+      paymentMethodRadio.checked = true;
+    }
+  }
+}
+
+window.addEventListener('DOMContentLoaded', loadFormDataFromLocalStorage);
+document
+  .querySelector('form')
+  .addEventListener('change', saveFormDataToLocalStorage);
