@@ -276,3 +276,7 @@ body {
   border-radius: 0;
   border: none;
 }
+
+.error {
+  color: red;
+}

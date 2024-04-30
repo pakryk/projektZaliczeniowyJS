@@ -1,12 +1,13 @@
-// Elements
+// Main section elements
 const $mainSection = document.querySelector('.section-main');
 const $formSection = document.querySelector('.section-form');
 const $bikeList = document.querySelector('.list-bike');
 const $bikeEl = document.querySelector('.bike');
-const $totalPriceEl = document.getElementById('total-price');
-const $selectedBikeBrandEl = document.querySelector('.selected-bike--brand');
+const $totalPrice = document.getElementById('total-price');
+const $selectedBikeBrand = document.querySelector('.selected-bike--brand');
+const $searchbar = document.querySelector('.header-input');
 
-// Accesories prices
+// Accessories prices
 const $sportPackPriceEl = document.querySelector('.sport-pack--price');
 const $streetPackPriceEl = document.querySelector('.street-pack--price');
 const $travelPackPriceEl = document.querySelector('.travel-pack--price');
@@ -25,7 +26,6 @@ const $btnBack = document.querySelector('.btn-back');
 const $nameInput = document.getElementById('name');
 const $destinationInput = document.getElementById('destination');
 const $dateInput = document.getElementById('date');
-
 const $error = document.querySelector('.error');
 
 // Final section elements
@@ -76,6 +76,8 @@ const bikeData = [
   },
 ];
 
+let filteredBikeData = bikeData; // To przechowuje aktualnie wyfiltrowane dane
+
 const accessories = {
   sportPackPrice: 10500,
   streetPackPrice: 7000,
@@ -88,7 +90,7 @@ const { sportPackPrice, streetPackPrice, travelPackPrice } = accessories;
 let totalPrice;
 let selectedBike;
 
-// Accesories prices
+// Accessories prices
 $sportPackPriceEl.textContent = `${sportPackPrice} PLN`;
 $streetPackPriceEl.textContent = `${streetPackPrice} PLN`;
 $travelPackPriceEl.textContent = `${travelPackPrice} PLN`;
@@ -127,17 +129,30 @@ function displayBikes(bikeList) {
 }
 displayBikes(bikeData);
 
+// Search bar implementation
+function searchFunction() {
+  let search = this.value.toLowerCase();
+
+  filteredBikeData = bikeData.filter(bike =>
+    bike.brand.toLowerCase().includes(search)
+  );
+
+  displayBikes(filteredBikeData);
+}
+
+$searchbar.addEventListener('input', searchFunction);
+
 // Clicked bike handler
 function getBikeInfoOnClick(e) {
   const $clickedBike = e.target.closest('.bike');
   if ($clickedBike) {
     const bikeIndex = $clickedBike.dataset.index;
-    const clickedBikeData = bikeData[bikeIndex];
+    const clickedBikeData = filteredBikeData[bikeIndex]; // zmiana bikeData na filteredBikeData
 
     totalPrice = clickedBikeData.price;
-    $totalPriceEl.textContent = `${totalPrice} PLN`;
+    $totalPrice.textContent = `${totalPrice} PLN`;
     selectedBike = clickedBikeData;
-    $selectedBikeBrandEl.textContent = `${clickedBikeData.brand} ${clickedBikeData.model}`;
+    $selectedBikeBrand.textContent = `${clickedBikeData.brand} ${clickedBikeData.model}`;
     $mainSection.classList.add('hidden');
     $formSection.classList.remove('hidden');
 
@@ -152,7 +167,7 @@ function addAccessoryPriceToTotalPrice(accessoryPrice, $btnAdd, $btnRemove) {
   if (!totalPrice) return; // Return if no bike is selected
 
   totalPrice += accessoryPrice;
-  $totalPriceEl.textContent = `${totalPrice} PLN`;
+  $totalPrice.textContent = `${totalPrice} PLN`;
 
   $btnAdd.disabled = true;
   $btnRemove.disabled = false;
@@ -198,7 +213,7 @@ function removeAccessoryPriceFromTotalPrice(
   if (!totalPrice) return; // Return if no bike is selected
 
   totalPrice -= accessoryPrice;
-  $totalPriceEl.textContent = `${totalPrice} PLN`;
+  $totalPrice.textContent = `${totalPrice} PLN`;
 
   $btnAdd.disabled = false;
   $btnRemove.disabled = true;
@@ -280,9 +295,7 @@ function handleSubmit(event) {
   $finalSection.classList.remove('hidden');
   $finalImg.src = `assets/bike-${selectedBike.imgIndex}.jpg`;
   $thankingText.textContent = `Dziękujemy za zakup ${selectedBike.brand} ${selectedBike.model}`;
-  const deliveryDate = new Date();
-  deliveryDate.setDate(deliveryDate.getDate() + daysDifference);
-  $deliveryText.textContent = `Motocykl zostanie dostarczony ${deliveryDate.toLocaleDateString()}`;
+  $deliveryText.textContent = `Motocykl zostanie dostarczony ${selectedDate.toLocaleDateString()}`;
   $totalPriceFinal.textContent = `Cena całkowita za zakup: ${totalPrice} PLN`;
   $payingMethodFinal.textContent = `wybrana forma płatności: ${$paymentMethod.value}`;
 
@@ -302,7 +315,6 @@ function showError(input, message) {
     input.parentNode.appendChild(errorEl);
   }
   errorEl.textContent = message;
-  errorEl.style.color = 'red';
 }
 
 // Function to hide error
