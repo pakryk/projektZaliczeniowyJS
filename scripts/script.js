@@ -329,7 +329,8 @@ function hideError(input) {
 }
 
 // Event listener for back button
-$btnBack.addEventListener('click', function () {
+$btnBack.addEventListener('click', function (e) {
+  e.preventDefault();
   $finalSection.classList.add('hidden');
   $formSection.classList.add('hidden');
   $mainSection.classList.remove('hidden');
